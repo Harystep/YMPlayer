@@ -1,0 +1,16 @@
+PODS:
+  - YMPlayer (0.1.0)
+
+DEPENDENCIES:
+  - YMPlayer (from `../`)
+
+EXTERNAL SOURCES:
+  YMPlayer:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  YMPlayer: 4de143b5c9ae33ac70a49dbef54bf91392ca5b93
+
+PODFILE CHECKSUM: 1b6e055eebbfc07c48a14d4a59b4dec360c46d74
+
+COCOAPODS: 1.12.1

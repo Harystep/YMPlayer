@@ -1,0 +1,22 @@
+{
+  "name": "YMPlayer",
+  "version": "0.1.0",
+  "summary": "A short description of YMPlayer.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/HaryStep/YMPlayer",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "HaryStep": "warm588@163.com"
+  },
+  "source": {
+    "git": "https://github.com/HaryStep/YMPlayer.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "YMPlayer/Classes/**/*"
+}

@@ -1,0 +1,6 @@
+framework module YMPlayer {
+  umbrella header "YMPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}

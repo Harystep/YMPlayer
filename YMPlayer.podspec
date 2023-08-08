@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YMPlayer'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A short description of YMPlayer.'
 
 # This description is used to generate tags and improve search results.
@@ -32,11 +32,33 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'YMPlayer/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'YMPlayer' => ['YMPlayer/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'YMPlayer' => ['YMPlayer/Assets/*.{png,xcassets,mp3,strings}']
+  }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.public_header_files = 'YMPlayer/Classes/**/*.h'
+  
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  
+  s.frameworks = 'SystemConfiguration', 'CoreTelephony', 'QuartzCore', 'CoreText', 'CoreGraphics', 'UIKit', 'Foundation', 'CFNetwork', 'CoreMotion', 'WebKit', 'AVKit', 'AVFoundation'
+  s.dependency 'Masonry', '~>1.1.0'
+  s.dependency 'MCUIColorUtils'
+  s.dependency 'pop'
+  s.dependency 'AFNetworking'
+  s.dependency 'SDWebImage'
+  s.dependency 'MJExtension'
+  s.dependency 'CocoaAsyncSocket'
+  s.dependency 'ReactiveObjC', '~>3.1.1'
+  s.dependency 'MCUIColorUtils'
+  s.dependency 'Toast'
+  s.dependency 'UICountingLabel'
+  s.dependency 'MBProgressHUD'
+  s.dependency 'IQKeyboardManager'
+  s.dependency 'ijkplayer', '~>1.1.3'
+  s.dependency 'WsRTC'
+  s.dependency 'WMPageController', '~> 2.4.0'
+  
 end
