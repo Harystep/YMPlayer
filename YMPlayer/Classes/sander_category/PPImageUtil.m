@@ -2,7 +2,7 @@
 @implementation PPImageUtil
 + (UIImage *)getImage:(NSString *)imageName {
     NSBundle * currentBundle = [NSBundle mainBundle];
-    NSString * path = [currentBundle pathForResource:imageName ofType:@"png" inDirectory: @"SJARCPlayer.bundle"];
+    NSString * path = [currentBundle pathForResource:imageName ofType:@"png" inDirectory: @"YMPlayer.bundle"];
     return [UIImage imageWithContentsOfFile:path];
 }
 + (UIImage *)imageNamed:(NSString *) imageName {

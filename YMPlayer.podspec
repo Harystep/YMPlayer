@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YMPlayer'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'A short description of YMPlayer.'
 
 # This description is used to generate tags and improve search results.
@@ -34,7 +34,7 @@ TODO: Add long description of the pod here.
   s.source_files = 'YMPlayer/Classes/**/*'
   
   s.resource_bundles = {
-    'YMPlayer' => ['YMPlayer/Assets/*']
+    'YMPlayer' => ['YMPlayer/Assets/*.{png,xcassets,mp3,strings}']
   }
 
   s.public_header_files = 'YMPlayer/Classes/**/*.h'

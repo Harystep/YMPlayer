@@ -1,10 +1,10 @@
 #import "PPSandBoxHelper.h"
 
-#define ARC_EN_LAN(key) [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"EN" ofType:@"lproj" inDirectory: @"HYPlayer.bundle"]] localizedStringForKey:key value:@""table:nil]
+#define ARC_EN_LAN(key) [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"EN" ofType:@"lproj" inDirectory: @"YMPlayer.bundle"]] localizedStringForKey:key value:@""table:nil]
 
-#define ARC_ZH_LAN(key) [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"zh_Hans" ofType:@"lproj" inDirectory: @"HYPlayer.bundle"]] localizedStringForKey:key value:@""table:nil]
+#define ARC_ZH_LAN(key) [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"zh_Hans" ofType:@"lproj" inDirectory: @"YMPlayer.bundle"]] localizedStringForKey:key value:@""table:nil]
 
-#define ARC_ZH_HANT(key) [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"zh_Hant" ofType:@"lproj" inDirectory: @"HYPlayer.bundle"]] localizedStringForKey:key value:@""table:nil]
+#define ARC_ZH_HANT(key) [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"zh_Hant" ofType:@"lproj" inDirectory: @"YMPlayer.bundle"]] localizedStringForKey:key value:@""table:nil]
 
 @implementation PPSandBoxHelper
 + (NSString *)homePath {
