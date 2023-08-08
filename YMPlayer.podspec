@@ -27,13 +27,14 @@ TODO: Add long description of the pod here.
   s.author           = { 'HaryStep' => 'warm588@163.com' }
   s.source           = { :git => 'https://github.com/HaryStep/YMPlayer.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '10.0'
-
+  
+  s.swift_version   = '4.0'
+  s.ios.deployment_target = '11.0'
+  s.static_framework = true
   s.source_files = 'YMPlayer/Classes/**/*'
   
   s.resource_bundles = {
-    'YMPlayer' => ['YMPlayer/Assets/*.{png,xcassets,mp3,strings}']
+    'YMPlayer' => ['YMPlayer/Assets/*']
   }
 
   s.public_header_files = 'YMPlayer/Classes/**/*.h'
