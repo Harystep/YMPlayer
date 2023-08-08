@@ -24,9 +24,11 @@
 #import "SJRechargeVerAlertView.h"
 #import "SDRechargeWebViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "SJRechangeHorAlertView.h"
+#import "PPChargetCoinData.h"
 
 #define GAME_MAX_COUNT_TIME 99
-@interface SJPushCoinGameViewController ()<SJRechargeVerAlertViewDelegate>
+@interface SJPushCoinGameViewController ()<SJRechargeVerAlertViewDelegate, SJUserMoneyDataViewDelegate, SJRechangeHorAlertViewDelegate>
 //@property (nonatomic, weak) PPGamePlayerView * theGamePlayerView;
 @property (nonatomic, weak) UIButton * theCloseButton;
 @property (nonatomic, weak) UIView * theFunctionRightView;
@@ -47,6 +49,7 @@
 @property (nonatomic,strong) UIImageView *avatarIv;
 @property (nonatomic, weak) SJUserMoneyDataView * theMyMoneyView;
 @property (nonatomic,strong) SJRechargeVerAlertView *rechargeAlertView;
+@property (nonatomic,strong) SJRechangeHorAlertView *rechangeAlertView;
 
 
 @end
@@ -180,9 +183,63 @@
     self.rechargeAlertView.coinDataView.pointValue = [PPUserInfoService get_Instance].points;
     self.rechargeAlertView.coinDataView.stoneValue = [PPUserInfoService get_Instance].money;
 }
+#pragma mark - 兑换
+- (void)showReChangePointView {
+    [self rechangeAlertView];
+    self.rechangeAlertView.coinDataView.priceValue = [PPUserInfoService get_Instance].goldCoin;
+    self.rechangeAlertView.coinDataView.pointValue = [PPUserInfoService get_Instance].points;
+    self.rechangeAlertView.coinDataView.stoneValue = [PPUserInfoService get_Instance].money;
+}
+
+#pragma mark - SJUserMoneyDataViewDelegate
+- (void)consumeTypeWithTag:(NSInteger)tag {
+    if(tag == 1) {//兑换
+        [self showReChangePointView];
+    } else {
+        [self showRechargeCoinView];
+    }
+}
+#pragma mark - SJRechangeHorAlertViewDelegate
+- (void)dissmissRechangeController {
+    _rechangeAlertView = nil;
+}
+- (void)payPointSuccessStatus {
+    [self.viewModel.userInfoCommand execute:nil];
+}
+
+- (void)rechangePointData:(PPChargetCoinData *)data {
+    PPChargetCoinData *chargetData = data;
+    PPDefineAlertContentView * alertContentView = [[PPDefineAlertContentView alloc] init];
+    alertContentView.alertTitle = ZCLocal(@"确定兑换");
+    NSString *contentStr = [NSString stringWithFormat:@"%@%@%@%@%@?", ZCLocal(@"确定使用"), chargetData.chargePrice, ZCLocal(@"积分兑换"), chargetData.coinCount, ZCLocal(@"金币")];
+    NSString *first = [NSString stringWithFormat:@"%@%@", chargetData.chargePrice, ZCLocal(@"积分_alert")];
+    NSString *end = [NSString stringWithFormat:@"%@%@", chargetData.coinCount, ZCLocal(@"金币")];
+    NSRange firstRange = [contentStr rangeOfString:first];
+    NSRange endRange = [contentStr rangeOfString:end];
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:contentStr];
+    [attributeString addAttributes:@{NSForegroundColorAttributeName:[UIColor colorForHex:@"#CF2F2A"]} range:firstRange];
+    [attributeString addAttributes:@{NSForegroundColorAttributeName:[UIColor colorForHex:@"#CF2F2A"]} range:endRange];
+    alertContentView.theMessageLabel.attributedText = attributeString;
+    SJAlertInGameViewController * alertInGameViewController = [[SJAlertInGameViewController alloc] init];
+    [alertInGameViewController insertAlertContentView:alertContentView];
+    [alertInGameViewController showAlertInViewController:self];
+    
+    @weakify_self;
+    [alertInGameViewController.alertDoneSubject subscribeNext:^(id  _Nullable x) {
+        @strongify_self;
+        NSInteger actionType = [x integerValue];
+        if (actionType == SDAlertTypeSure) {
+            [self.viewModel chargeByPoint:chargetData];
+        }
+    }];
+}
+
 #pragma mark - SJRechargeVerAlertViewDelegate
 - (void)dissmissChargeController {
     _rechargeAlertView = nil;
+}
+- (void)paySuccessStatus {
+    [self.viewModel.userInfoCommand execute:nil];
 }
 - (void)showChargeAliPayViewData:(NSString *) data {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"alipay://"]]) {
@@ -192,10 +249,6 @@
         SDRechargeWebViewController *webViewController = [[SDRechargeWebViewController alloc] initWithData:data];
         [self presentViewController:webViewController animated:true completion:nil];
     }
-}
-
-- (void)paySuccessStatus {
-    [self.viewModel.userInfoCommand execute:nil];
 }
 
 #pragma mark - action
@@ -305,7 +358,7 @@
 }
 #pragma mark - 兑换
 - (void)onRechangePress {
-    
+    [self showReChangePointView];
 }
 #pragma mark - 充值
 - (void)onRechargePress {
@@ -374,6 +427,11 @@
         self.rechargeAlertView.coinDataView.priceValue = [PPUserInfoService get_Instance].goldCoin;
         self.rechargeAlertView.coinDataView.pointValue = [PPUserInfoService get_Instance].points;
         self.rechargeAlertView.coinDataView.stoneValue = [PPUserInfoService get_Instance].money;
+    }
+    if(_rechangeAlertView) {
+        self.rechangeAlertView.coinDataView.priceValue = [PPUserInfoService get_Instance].goldCoin;
+        self.rechangeAlertView.coinDataView.pointValue = [PPUserInfoService get_Instance].points;
+        self.rechangeAlertView.coinDataView.stoneValue = [PPUserInfoService get_Instance].money;
     }
 }
 - (void)changeWaitPlayer:(NSArray<SDPlayerInfoModel *> *)list {
@@ -705,6 +763,7 @@
             make.height.mas_equalTo(DSize(52));
         }];
         _theMyMoneyView = theView;
+        theView.delegate = self;
     }
     return _theMyMoneyView;
 }
@@ -719,6 +778,18 @@
         }];
     }
     return _rechargeAlertView;
+}
+//SJRechangeHorAlertView
+- (SJRechangeHorAlertView *)rechangeAlertView {
+    if (!_rechangeAlertView) {
+        _rechangeAlertView = [[SJRechangeHorAlertView alloc] init];
+        [self.view addSubview:_rechangeAlertView];
+        [_rechangeAlertView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.view);
+        }];
+        _rechangeAlertView.delegate = self;
+    }
+    return _rechangeAlertView;
 }
 
 @end

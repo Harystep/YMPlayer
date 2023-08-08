@@ -118,19 +118,19 @@
             SJPCChargeListResponseModel * response = x;
             PCChargeTypeInfoModel * chargetInfoModel = response.data;
             NSMutableArray * list = [NSMutableArray arrayWithCapacity:0];
-            if(chargetInfoModel.month != nil) {
+            if(chargetInfoModel.month.iosOption != nil) {
                 PPChargetCoinData *coinModel = [[PPChargetCoinData alloc] initWithCoinData:chargetInfoModel.month];
                 coinModel.type = 100003;
                 coinModel.payType = [self convertPayTypeWithData:chargetInfoModel.paySupport];
                 [list addObject:coinModel];
             }
-            if(chargetInfoModel.week != nil) {
+            if(chargetInfoModel.week.iosOption != nil) {
                 PPChargetCoinData *coinModel = [[PPChargetCoinData alloc] initWithCoinData:chargetInfoModel.week];
                 coinModel.type = 100002;
                 coinModel.payType = [self convertPayTypeWithData:chargetInfoModel.paySupport];
                 [list addObject:coinModel];
             }
-            if(chargetInfoModel.first != nil) {
+            if(chargetInfoModel.first.iosOption != nil) {
                 PPChargetCoinData *coinModel = [[PPChargetCoinData alloc] initWithCoinData:chargetInfoModel.first];
                 coinModel.type = 100001;
                 coinModel.payType = [self convertPayTypeWithData:chargetInfoModel.paySupport];

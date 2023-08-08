@@ -828,6 +828,8 @@
             make.centerY.mas_equalTo(_coinContentBgView.mas_centerY);
         }];
         _theGameCoinView = theView;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onChargePress)];
+        [theView addGestureRecognizer:tap];
     }
     return _theGameCoinView;
 }
@@ -844,6 +846,8 @@
             make.trailing.mas_equalTo(_coinContentBgView.mas_trailing);
         }];
         _theGamePointView = theView;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPointExchangePress)];
+        [theView addGestureRecognizer:tap];
     }
     return _theGamePointView;
 }

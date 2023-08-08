@@ -96,19 +96,19 @@
         SJPCChargeListResponseModel * result = (SJPCChargeListResponseModel *)responseModel;
         PCChargeTypeInfoModel * data = result.data;        
         if (![[PPNetworkConfig sharedInstance] inAppStoreReview]) {
-            if(data.month != nil) {
+            if(data.month.iosOption != nil) {
                 PPChargetCoinData *coinModel = [[PPChargetCoinData alloc] initWithCoinData:data.month];
                 coinModel.type = 100003;
                 coinModel.payType = [self convertPayTypeWithData:data.paySupport];
                 [self.dataList addObject:coinModel];
             }
-            if(data.week != nil) {
+            if(data.week.iosOption != nil) {
                 PPChargetCoinData *coinModel = [[PPChargetCoinData alloc] initWithCoinData:data.week];
                 coinModel.type = 100002;
                 coinModel.payType = [self convertPayTypeWithData:data.paySupport];
                 [self.dataList addObject:coinModel];
             }
-            if(data.first != nil) {
+            if(data.first.iosOption != nil) {
                 PPChargetCoinData *coinModel = [[PPChargetCoinData alloc] initWithCoinData:data.first];
                 coinModel.type = 100001;
                 coinModel.payType = [self convertPayTypeWithData:data.paySupport];

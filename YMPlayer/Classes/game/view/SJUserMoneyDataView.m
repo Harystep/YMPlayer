@@ -48,6 +48,12 @@
     return _coinContentBgView;
 }
 
+- (void)onPressClick:(UITapGestureRecognizer *)tap {
+    if([self.delegate respondsToSelector:@selector(consumeTypeWithTag:)]) {
+        [self.delegate consumeTypeWithTag:tap.view.tag];
+    }
+}
+
 - (PPSaintGameValueView * )theGameCoinView{
     if (!_theGameCoinView) {
         PPSaintGameValueView * theView = [[PPSaintGameValueView alloc] initWithValueType:SDGameValue_Coin];
@@ -60,6 +66,9 @@
             make.centerY.mas_equalTo(_coinContentBgView.mas_centerY);
         }];
         _theGameCoinView = theView;
+        theView.tag = 0;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPressClick:)];
+        [theView addGestureRecognizer:tap];
     }
     return _theGameCoinView;
 }
@@ -76,6 +85,9 @@
             make.trailing.mas_equalTo(_coinContentBgView.mas_trailing);
         }];
         _theGamePointView = theView;
+        theView.tag = 1;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPressClick:)];
+        [theView addGestureRecognizer:tap];
     }
     return _theGamePointView;
 }

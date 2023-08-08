@@ -99,7 +99,7 @@
 }
 
 + (NSInteger)preSetLanguageType {
-    NSInteger type = 3;
+    NSInteger type = 1;
 //    NSString *local = [[NSLocale preferredLanguages] objectAtIndex:0];
 //    if([local containsString:@"zh-Hans"]) {
 //        type = 1;
