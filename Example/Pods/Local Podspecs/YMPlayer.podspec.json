@@ -1,6 +1,6 @@
 {
   "name": "YMPlayer",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "summary": "A short description of YMPlayer.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/HaryStep/YMPlayer",
@@ -13,10 +13,86 @@
   },
   "source": {
     "git": "https://github.com/HaryStep/YMPlayer.git",
-    "tag": "0.1.0"
+    "tag": "1.0.1"
   },
+  "swift_versions": "4.0",
   "platforms": {
-    "ios": "10.0"
+    "ios": "11.0"
   },
-  "source_files": "YMPlayer/Classes/**/*"
+  "static_framework": true,
+  "source_files": "YMPlayer/Classes/**/*",
+  "resource_bundles": {
+    "YMPlayer": [
+      "YMPlayer/Assets/*"
+    ]
+  },
+  "public_header_files": "YMPlayer/Classes/**/*.h",
+  "pod_target_xcconfig": {
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+  },
+  "user_target_xcconfig": {
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+  },
+  "frameworks": [
+    "SystemConfiguration",
+    "CoreTelephony",
+    "QuartzCore",
+    "CoreText",
+    "CoreGraphics",
+    "UIKit",
+    "Foundation",
+    "CFNetwork",
+    "CoreMotion",
+    "WebKit",
+    "AVKit",
+    "AVFoundation"
+  ],
+  "dependencies": {
+    "Masonry": [
+      "~>1.1.0"
+    ],
+    "MCUIColorUtils": [
+
+    ],
+    "pop": [
+
+    ],
+    "AFNetworking": [
+
+    ],
+    "SDWebImage": [
+
+    ],
+    "MJExtension": [
+
+    ],
+    "CocoaAsyncSocket": [
+
+    ],
+    "ReactiveObjC": [
+      "~>3.1.1"
+    ],
+    "Toast": [
+
+    ],
+    "UICountingLabel": [
+
+    ],
+    "MBProgressHUD": [
+
+    ],
+    "IQKeyboardManager": [
+
+    ],
+    "ijkplayer": [
+      "~>1.1.3"
+    ],
+    "WsRTC": [
+
+    ],
+    "WMPageController": [
+      "~> 2.4.0"
+    ]
+  },
+  "swift_version": "4.0"
 }
