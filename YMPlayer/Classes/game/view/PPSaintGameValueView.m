@@ -67,7 +67,7 @@
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(valueWidth);
     }];
-    [self.theValueLabel countFrom:currentValue to:self.gameValue withDuration:0.3];
+    self.theValueLabel.text = [self handleLargeValue:currentValue];
 }
 
 - (NSString *)handleLargeValue:(NSInteger)value {

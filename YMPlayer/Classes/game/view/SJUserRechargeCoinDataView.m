@@ -90,7 +90,7 @@
 - (void)handleLargeValue:(NSString *)value view:(UILabel *)contentL {
     if([value integerValue] > 1000000 && [value integerValue] < 10000000) {
         NSInteger num = [value integerValue];
-        contentL.text = [NSString stringWithFormat:@"%tuk", num/1000.0];
+        contentL.text = [NSString stringWithFormat:@"%.fk", num/1000.0];
     } else if([value integerValue] >= 10000000) {
         NSInteger num = [value integerValue];
         contentL.text = [NSString stringWithFormat:@"%.2f亿", num/100000000.0];

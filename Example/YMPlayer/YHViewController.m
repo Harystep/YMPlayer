@@ -48,7 +48,7 @@
         [SDGameModule presentViewController:@"8cfca025a66f" roomId:@"" machineType:3 inRootController:self];
     } else {
         //8cfca025a67c  8cfca02592c3  8cfca025a661  8cfca025a67f             4
-        [SDGameModule presentViewController:@"8cfca025a67c" roomId:@"" machineType:4 inRootController:self];
+        [SDGameModule presentViewController:@"8cfca02592c3" roomId:@"" machineType:4 inRootController:self];
     }
 }
 
@@ -65,7 +65,7 @@
     //添加渠道参数
     [PPNetworkConfig sharedInstance].channelKey = @"huanyingjiejiquan";
     //8be27b1a0eb41b52687fd23aa7c34632  ad274f8a6faf17c0d814d23b2b3f0d31
-    [[PPUserInfoService get_Instance] setAccess_token:@"8be27b1a0eb41b52687fd23aa7c34632"];
+    [[PPUserInfoService get_Instance] setAccess_token:@"e575b956e3e5fdc4dc3285825a7f6dd0"];
            
     
 }
